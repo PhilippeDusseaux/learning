@@ -8,15 +8,28 @@ MainWindow::MainWindow(QWidget *parent) :
     // configuration de la gui
     ui->setupUi(this);
 
-    // allocation dynamique de la view, de la scene, de l'item et de la route
-    /*view = ui->centralWidget;
-    view->
-    scene = new QGraphicsScene;
-    route = new QGeoRoute;*/
+    // création de la gridLayout, de la view et allocation dynamique de la scene
 
+    view = ui->graphicsView;
+    scene = new QGraphicsScene();
 
+    // construction de la scene
+    QRect dimScene(0.0,0.0,1920.0,1080.0);
+    scene->setSceneRect(dimScene);
 
+    // creation de text et le placer dans textEdit
+    QString text = "Hello, world!";
+    ui->textEdit->setText(text);
 
+    // creation d'une PIXMAP
+    QPixmap bg_pixmap("map.png");
+    //ui->graphicsView->addScrollBarWidget(bg_pixmap,Qt::AlignCenter);
+
+    // association de la scene à la view
+    scene->addPixmap(bg_pixmap);
+    view->setScene(scene);
+
+    view->show();
 }
 
 MainWindow::~MainWindow()
