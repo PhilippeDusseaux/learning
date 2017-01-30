@@ -19,7 +19,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -32,7 +31,6 @@ public:
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QGraphicsView *graphicsView;
-    QTextEdit *textEdit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -42,11 +40,13 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1150, 685);
-        centralWidget = new QWidget(MainWindow);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
+        MainWindow->setSizePolicy(sizePolicy);
+        centralWidget = new QWidget(MainWindow);
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
         centralWidget->setSizePolicy(sizePolicy);
         gridLayoutWidget = new QWidget(centralWidget);
@@ -59,16 +59,15 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         graphicsView = new QGraphicsView(gridLayoutWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
+        graphicsView->setFocusPolicy(Qt::WheelFocus);
+        graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+        graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         graphicsView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
         graphicsView->setAlignment(Qt::AlignCenter);
-        graphicsView->setTransformationAnchor(QGraphicsView::NoAnchor);
+        graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
+        graphicsView->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
 
-        gridLayout->addWidget(graphicsView, 0, 1, 1, 1);
-
-        textEdit = new QTextEdit(gridLayoutWidget);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-
-        gridLayout->addWidget(textEdit, 0, 0, 1, 1);
+        gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);

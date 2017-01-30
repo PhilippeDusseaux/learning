@@ -14,20 +14,14 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new QGraphicsScene(ui->graphicsView);
 
     // construction de la scene
-    QRect dimScene(0.0,0.0,1920.0,1080.0);
+    QRect dimScene(-180,-90,360,180);
     scene->setSceneRect(dimScene);
 
-    // creation de text et le placer dans textEdit
-    QString text = "Hello, world!";
-    ui->textEdit->setText(text);
-
-    // creation d'une PIXMAP
-    QPixmap bg_pixmap("map.png");
+    // on inverse l'axe des ordonnées
+    ui->graphicsView->scale(1.0,-1.0);
 
     // association de la scene à la view
     ui->graphicsView->setScene(scene);
-
-    scene->addPixmap(bg_pixmap);
 
     ui->graphicsView->show();
 }
