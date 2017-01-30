@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // création de la gridLayout, de la view et allocation dynamique de la scene
 
-    view = ui->graphicsView;
-    scene = new QGraphicsScene();
+    ui->graphicsView;
+    scene = new QGraphicsScene(ui->graphicsView);
 
     // construction de la scene
     QRect dimScene(0.0,0.0,1920.0,1080.0);
@@ -23,19 +23,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // creation d'une PIXMAP
     QPixmap bg_pixmap("map.png");
-    //ui->graphicsView->addScrollBarWidget(bg_pixmap,Qt::AlignCenter);
 
     // association de la scene à la view
-    scene->addPixmap(bg_pixmap);
-    view->setScene(scene);
+    ui->graphicsView->setScene(scene);
 
-    view->show();
+    scene->addPixmap(bg_pixmap);
+
+    ui->graphicsView->show();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete view;
     delete scene;
-    delete route;
 }

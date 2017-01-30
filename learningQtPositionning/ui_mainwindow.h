@@ -41,7 +41,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1277, 710);
+        MainWindow->resize(1150, 685);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -51,16 +51,17 @@ public:
         centralWidget->setSizePolicy(sizePolicy);
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(0, 0, 1281, 651));
+        gridLayoutWidget->setGeometry(QRect(0, 0, 1151, 641));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setSizeConstraint(QLayout::SetNoConstraint);
         gridLayout->setContentsMargins(0, 0, 0, 0);
         graphicsView = new QGraphicsView(gridLayoutWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        graphicsView->setAlignment(Qt::AlignCenter);
+        graphicsView->setTransformationAnchor(QGraphicsView::NoAnchor);
 
         gridLayout->addWidget(graphicsView, 0, 1, 1, 1);
 
@@ -72,7 +73,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1277, 26));
+        menuBar->setGeometry(QRect(0, 0, 1150, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

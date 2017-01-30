@@ -2,12 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGridLayout>
-#include <QGraphicsView>
 #include <QGraphicsScene>
-#include <QGraphicsScene>
-#include <QGraphicsItem>
-#include <QGeoRoute>
 
 namespace Ui {
 class MainWindow;
@@ -23,10 +18,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QGridLayout * gridLayout;
-    QGraphicsView * view;
     QGraphicsScene * scene;
-    QGeoRoute * route;
 };
 
 #endif // MAINWINDOW_H
