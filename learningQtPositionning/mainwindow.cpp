@@ -11,8 +11,8 @@ protected:
     {
 
         qDebug() << "Scene coordinates position : " << event->scenePos();
-        qDebug() << "Item coordinates pos : " << event->pos();
-        qDebug() << "Screen coordinates pos : " << event->screenPos();
+        /*qDebug() << "Item coordinates pos : " << event->pos();
+        qDebug() << "Screen coordinates pos : " << event->screenPos();*/
     }
 };
 
@@ -33,9 +33,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QGraphicsPixmapItem * PixmapItem = new QGraphicsPixmapItem(terre,Q_NULLPTR);
 
     // on place la terre en bas à gauche
-    //QPoint origineTerre(-180.0,-90.0);
     QPoint origineTerre(-(terre.width()/2),-(terre.height()/2));
     PixmapItem->setOffset(origineTerre);
+
     QTransform pixmapItemTransform;
     pixmapItemTransform.scale(360.0/terre.width(),-180.0/terre.height());
     PixmapItem->setTransform(pixmapItemTransform);
@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     scene->addItem(PixmapItem);
 
     // on inverse l'axe des ordonnées
-    ui->graphicsView->scale(4.0,-4.0);
+    ui->graphicsView->scale(this->width()/360,-this->height()/180);
     ui->graphicsView->show();
 }
 
