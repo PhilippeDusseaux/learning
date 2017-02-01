@@ -28,7 +28,6 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QGraphicsView *graphicsView;
     QMenuBar *menuBar;
@@ -49,23 +48,16 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
         centralWidget->setSizePolicy(sizePolicy);
-        gridLayoutWidget = new QWidget(centralWidget);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(0, 0, 1151, 641));
-        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout = new QGridLayout(centralWidget);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        graphicsView = new QGraphicsView(gridLayoutWidget);
+        graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setFocusPolicy(Qt::WheelFocus);
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         graphicsView->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        graphicsView->setAlignment(Qt::AlignCenter);
-        graphicsView->setDragMode(QGraphicsView::ScrollHandDrag);
-        graphicsView->setTransformationAnchor(QGraphicsView::AnchorViewCenter);
 
         gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
 
