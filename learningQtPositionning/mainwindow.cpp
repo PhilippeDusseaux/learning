@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsPixmapItem>
+#include <QDesktopWidget>
 
 class CustomScene : public QGraphicsScene
 {
@@ -20,8 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    // création du widget screens
+    QDesktopWidget * screens = QApplication::desktop();
+    // mainwindow récupère les dimensions de l'écran
+    this->setBaseSize(screens->width(),screens->height());
+
     QPixmap terre;
     terre.load("Mercator_projection_SW","jpeg");
+    terre.scaled(Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
 
     // configuration de la gui
     ui->setupUi(this);
@@ -32,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // construction de GraphicsPixmapItem à partir de terre et il n'a pas de parent
     QGraphicsPixmapItem * PixmapItem = new QGraphicsPixmapItem(terre,Q_NULLPTR);
 
-    // on place la terre en bas à gauche
+    // on place la terre au milieu de la carte
     QPoint origineTerre(-(terre.width()/2),-(terre.height()/2));
     PixmapItem->setOffset(origineTerre);
 
@@ -48,6 +55,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // on inverse l'axe des ordonnées
     ui->graphicsView->scale(this->width()/360,-this->height()/180);
+
+    //ui->graphicsView->adjustSize();
+    //ui->graphicsView->viewport()->updateGeometry();
+
     ui->graphicsView->show();
 }
 
